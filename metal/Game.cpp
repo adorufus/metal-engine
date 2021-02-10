@@ -14,6 +14,7 @@ SDL_Renderer* Game::renderer = nullptr;
 
 Manager manager;
 auto& player(manager.addEntity());
+auto& enemy(manager.addEntity());
 
 Game::Game() {
 
@@ -50,13 +51,13 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 		isRunning = false;
 	}
 
-	//playerTexture = TextureManager::LoadTexture("Assets/character.png", renderer);
-	//player = new GameObject("Assets/character2.png", 32, 32, 0, 0);
-	//enemy = new GameObject("Assets/character.png", 32, 32, 15, 15);
 	map = new Map();
 
-	player.addComponent<Transform>(50, 50);
-	player.addComponent<Sprite>("Assets/character.png");
+	player.addComponent<Transform>(100, 100);
+	player.addComponent<Sprite>("Assets/character2.png");
+
+	enemy.addComponent<Transform>(50, 50);
+	enemy.addComponent<Sprite>("Assets/character.png");
 }
 
 void Game::handleEvents() {
@@ -76,13 +77,10 @@ void Game::update() {
 	Sprite playerSprite = player.getComponent<Sprite>();
 
 	count++;
-	/*player->Update();*/
-	//enemy->Update();
 	manager.update();
-	if (playerTransform.x() > 100) {
-		player.getComponent<Sprite>().setTexture("Assets/character2.png");
-	}
-	/*playerTransform = newPlayer.getComponent<Transform>();*/
+	/*if (playerTransform.x() > 100) {
+		player.getComponent<Sprite>().setTexture("Assets/character.png");
+	}*/
 	std::cout << "newPlayerPos: " << playerTransform.x() << ", " << player.getComponent<Transform>().y() << std::endl;
 }
 
