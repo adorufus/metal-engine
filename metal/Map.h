@@ -1,0 +1,21 @@
+#pragma once
+#include "Game.h"
+class Map
+{
+public:
+	Map();
+	~Map();
+
+	void LoadMap(int arr[20][25]);
+	void DrawMap();
+
+private:
+	SDL_Rect src, dst;
+	SDL_Texture 
+		*dirt,
+		*grass,
+		*water;
+
+	int map[20][25];
+};
+

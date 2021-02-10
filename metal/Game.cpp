@@ -1,10 +1,20 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "Map.h"
+#include "ECS.h"
+#include "Components.h"
 
 SDL_Texture* playerTexture;
 SDL_Rect srcR, destR;
-GameObject* player;
+GameObject* player, * enemy;
+Map* map;
+Transform playerTransform;
+
+SDL_Renderer* Game::renderer = nullptr;
+
+Manager manager;
+auto& newPlayer(manager.addEntity());
 
 Game::Game() {
 
@@ -42,7 +52,13 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	//playerTexture = TextureManager::LoadTexture("Assets/character.png", renderer);
-	player = new GameObject("Assets/character.png", renderer, 32, 32);
+	player = new GameObject("Assets/character2.png", 32, 32, 0, 0);
+	enemy = new GameObject("Assets/character.png", 32, 32, 15, 15);
+	map = new Map();
+
+	newPlayer.addComponent<Transform>();
+
+	newPlayer.getComponent<Transform>().setPos(500, 500);
 }
 
 void Game::handleEvents() {
@@ -60,12 +76,17 @@ void Game::handleEvents() {
 void Game::update() {
 	count++;
 	player->Update();
-	std::cout << "Counter: " << count << std::endl;
+	enemy->Update();
+	manager.update();
+	playerTransform = newPlayer.getComponent<Transform>();
+	std::cout << "newPlayerPos: " << playerTransform.x() << ", " << playerTransform.y() << std::endl;
 }
 
 void Game::render(){
 	SDL_RenderClear(renderer);
+	map->DrawMap();
 	player->Render();
+	enemy->Render();
 	SDL_RenderPresent(renderer);
 }
 
