@@ -1,5 +1,5 @@
-#pragma once
-#include "ECS.h"
+#include "Components.h"
+
 class Transform : public Component
 {
 private:
@@ -7,12 +7,15 @@ private:
 	int yPos;
 
 public:
-	int x() { return xPos; }
-	int y() { return yPos; }
 
-	void init() override {
+	Transform() {
 		xPos = 0;
 		yPos = 0;
+	}
+
+	Transform(int x, int y) {
+		xPos = x;
+		yPos = y;
 	}
 
 	void update() override {
@@ -20,9 +23,12 @@ public:
 		yPos++;
 	}
 
+	int x() { return xPos; }
+	void x(int x) { xPos = x; }
+	int y() { return yPos; }
+	void y(int y) { yPos = y; }
 	void setPos(int x, int y) {
 		xPos = x;
 		yPos = y;
 	}
 };
-

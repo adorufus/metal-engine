@@ -2,19 +2,18 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Map.h"
-#include "ECS.h"
-#include "Components.h"
+#include "ECS/ECS.h"
+#include "ECS/Components.h"
 
 SDL_Texture* playerTexture;
 SDL_Rect srcR, destR;
-GameObject* player, * enemy;
 Map* map;
 Transform playerTransform;
 
 SDL_Renderer* Game::renderer = nullptr;
 
 Manager manager;
-auto& newPlayer(manager.addEntity());
+auto& player(manager.addEntity());
 
 Game::Game() {
 
@@ -52,13 +51,12 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	//playerTexture = TextureManager::LoadTexture("Assets/character.png", renderer);
-	player = new GameObject("Assets/character2.png", 32, 32, 0, 0);
-	enemy = new GameObject("Assets/character.png", 32, 32, 15, 15);
+	//player = new GameObject("Assets/character2.png", 32, 32, 0, 0);
+	//enemy = new GameObject("Assets/character.png", 32, 32, 15, 15);
 	map = new Map();
 
-	newPlayer.addComponent<Transform>();
-
-	newPlayer.getComponent<Transform>().setPos(500, 500);
+	player.addComponent<Transform>(50, 50);
+	player.addComponent<Sprite>("Assets/character.png");
 }
 
 void Game::handleEvents() {
@@ -74,19 +72,26 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+	Transform playerTransform = player.getComponent<Transform>();
+	Sprite playerSprite = player.getComponent<Sprite>();
+
 	count++;
-	player->Update();
-	enemy->Update();
+	/*player->Update();*/
+	//enemy->Update();
 	manager.update();
-	playerTransform = newPlayer.getComponent<Transform>();
-	std::cout << "newPlayerPos: " << playerTransform.x() << ", " << playerTransform.y() << std::endl;
+	if (playerTransform.x() > 100) {
+		player.getComponent<Sprite>().setTexture("Assets/character2.png");
+	}
+	/*playerTransform = newPlayer.getComponent<Transform>();*/
+	std::cout << "newPlayerPos: " << playerTransform.x() << ", " << player.getComponent<Transform>().y() << std::endl;
 }
 
 void Game::render(){
 	SDL_RenderClear(renderer);
 	map->DrawMap();
-	player->Render();
-	enemy->Render();
+	//player->Render();
+	//enemy->Render();
+	manager.draw();
 	SDL_RenderPresent(renderer);
 }
 
