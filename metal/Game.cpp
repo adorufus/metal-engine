@@ -4,11 +4,13 @@
 #include "Map.h"
 #include "ECS/ECS.h"
 #include "ECS/Components.h"
+#include "Vector2D.h"
 
 SDL_Texture* playerTexture;
 SDL_Rect srcR, destR;
 Map* map;
 Transform playerTransform;
+SDL_Event Game::event;
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -55,13 +57,13 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 
 	player.addComponent<Transform>(100, 100);
 	player.addComponent<Sprite>("Assets/character2.png");
+	player.addComponent<KeyboardController>();
 
 	enemy.addComponent<Transform>(50, 50);
 	enemy.addComponent<Sprite>("Assets/character.png");
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type) {
 	case SDL_QUIT:
@@ -78,10 +80,8 @@ void Game::update() {
 
 	count++;
 	manager.update();
-	/*if (playerTransform.x() > 100) {
-		player.getComponent<Sprite>().setTexture("Assets/character.png");
-	}*/
-	std::cout << "newPlayerPos: " << playerTransform.x() << ", " << player.getComponent<Transform>().y() << std::endl;
+	
+	std::cout << "newPlayerPos: " << playerTransform.position.x << ", " << playerTransform.position.y << std::endl;
 }
 
 void Game::render(){

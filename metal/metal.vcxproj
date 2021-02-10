@@ -153,6 +153,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="metal.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ECS\Components.h" />
@@ -161,9 +162,11 @@
     <ClInclude Include="ECS\Transform.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="metal.rc" />
