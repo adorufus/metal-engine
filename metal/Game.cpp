@@ -59,7 +59,7 @@ void Game::update() {
 	count++;
 	destR.h = 32;
 	destR.w = 32;
-	destR.x = count * 0.1;
+	destR.x = count;
 	std::cout << "Counter: " << count << std::endl;
 }
 
