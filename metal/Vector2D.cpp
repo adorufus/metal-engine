@@ -70,6 +70,20 @@ Vector2D& Vector2D::operator/=(const Vector2D& vector2D) {
 	return this->Divide(vector2D);
 }
 
+Vector2D& Vector2D::operator*(const int& i) {
+	this->x *= i;
+	this->y *= i;
+
+	return *this;
+}
+
+Vector2D& Vector2D::Zero() {
+	this->x = 0;
+	this->y = 0;
+
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& stream, const Vector2D& vec) {
 	stream << "Vector 2D: " << std::endl << "(X: " << vec.x << " Y: " << vec.y << ")" << std::endl;
 

@@ -7,21 +7,37 @@ public:
 	Vector2D position;
 	Vector2D velocity;
 
+	int height = 32;
+	int width = 32;
+	int scale = 1;
+
 	int speed = 3;
 
 	Transform() {
-		position.x = 0;
-		position.y = 0;
+		position.Zero();
 	}
 
-	Transform(int x, int y) {
+	Transform(int _scale) {
+		position.Zero();
+		scale = _scale;
+	}
+
+	Transform(float x, float y) {
 		position.x = x;
 		position.y = y;
 	}
 
+	Transform(float x, float y, int _width, int _height, int _scale) {
+		position.x = x;
+		position.y = y;
+
+		height = _height;
+		width = _width;
+		scale = _scale;
+	}
+
 	void init() override {
-		velocity.x = 0;
-		velocity.y = 0;
+		velocity.Zero();
 	}
 
 	void update() override {
