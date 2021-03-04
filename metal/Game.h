@@ -1,10 +1,11 @@
 #pragma once
-#ifndef Game_h
-#define Game_h
 
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <vector>
+
+class Collider;
 
 class Game
 {
@@ -58,13 +59,15 @@ public:
 		return isRunning;
 	};
 
+	static void AddTile(int id, int x, int y);
+
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
+	static std::vector<Collider*> colliders;
 
 private:
 	int count = 0;
 	bool isRunning;
 	SDL_Window* window;
 };
-#endif /*Game_h*/
 

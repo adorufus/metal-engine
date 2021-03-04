@@ -1,5 +1,6 @@
 #include "Components.h"
 #include "SDL.h"
+#include "../TextureManager.h"
 
 class Sprite : public Component {
 private:

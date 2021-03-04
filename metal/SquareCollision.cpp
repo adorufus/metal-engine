@@ -1,4 +1,5 @@
 #include "SquareCollision.h"
+#include "Collider.h"
 
 bool SquareCollision::AABB(const SDL_Rect& recA, const SDL_Rect& recB) {
 	if (
@@ -11,4 +12,14 @@ bool SquareCollision::AABB(const SDL_Rect& recA, const SDL_Rect& recB) {
 	}
 
 	return false;
+}
+
+bool SquareCollision::AABB(const Collider& colA, const Collider& colB) {
+	if (AABB(colA.collider, colB.collider)) {
+		std::cout << colA.tag << " hit: " << colB.tag << std::endl;
+		return true;
+	}
+	else {
+		return false;
+	}
 }
