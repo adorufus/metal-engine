@@ -2,13 +2,18 @@
 #include "Game.h"
 #include "ECS/ECS.h"
 #include "ECS/Components.h"
+#include "Utils.h"
 
 class KeyboardController : public Component {
 public:
 	Transform* transform;
+	Sprite* sprite;
+
+	//bool mapContainsKey()
 
 	void init() override {
 		transform = &entity->getComponent<Transform>();
+		sprite = &entity->getComponent<Sprite>();
 	}
 
 	void update() override {
@@ -16,15 +21,28 @@ public:
 			switch (Game::event.key.keysym.sym) {
 			case SDLK_w:
 				transform->velocity.y = -1;
+				if (Utils::animContainsKey(sprite->animations, "Walk")) {
+					sprite->Play("Walk");
+				}
 				break;
 			case SDLK_s:
 				transform->velocity.y = 1;
+				if (Utils::animContainsKey(sprite->animations, "Walk")) {
+					sprite->Play("Walk");
+				}
 				break;
 			case SDLK_a:
 				transform->velocity.x = -1;
+				if (Utils::animContainsKey(sprite->animations, "Walk")) {
+					sprite->Play("Walk");
+				}
 				break;
 			case SDLK_d:
 				transform->velocity.x = 1;
+				if (Utils::animContainsKey(sprite->animations, "Walk")) {
+					sprite->Play("Walk");
+				}
+				break;
 			default:
 				break;
 			}
@@ -34,15 +52,28 @@ public:
 			switch (Game::event.key.keysym.sym) {
 			case SDLK_w:
 				transform->velocity.y = 0;
+				if (Utils::animContainsKey(sprite->animations, "Idle")) {
+					sprite->Play("Idle");
+				}
 				break;
 			case SDLK_s:
 				transform->velocity.y = 0;
+				if (Utils::animContainsKey(sprite->animations, "Idle")) {
+					sprite->Play("Idle");
+				}
 				break;
 			case SDLK_a:
 				transform->velocity.x = 0;
+				if (Utils::animContainsKey(sprite->animations, "Idle")) {
+					sprite->Play("Idle");
+				}
 				break;
 			case SDLK_d:
 				transform->velocity.x = 0;
+				if (Utils::animContainsKey(sprite->animations, "Idle")) {
+					sprite->Play("Idle");
+				}
+				break;
 			default:
 				break;
 			}

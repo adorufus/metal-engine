@@ -157,6 +157,7 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ECS\Components.h" />
     <ClInclude Include="ECS\ECS.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="SquareCollision.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>

@@ -72,7 +72,7 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	Map::LoadMap("Assets/okta.map", 16, 16);
 
 	player.addComponent<Transform>(1);
-	player.addComponent<Sprite>("Assets/slime-animated.png", 4, 100);
+	player.addComponent<Sprite>("Assets/slime-animated.png", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<Collider>("enemy");
 	player.assignGroup(groupPlayer);
