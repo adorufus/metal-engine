@@ -8,16 +8,20 @@ class KeyboardController : public Component {
 public:
 	Transform* transform;
 	Sprite* sprite;
+	PhysicsBody* pb;
 
 	//bool mapContainsKey()
 
 	void init() override {
 		transform = &entity->getComponent<Transform>();
 		sprite = &entity->getComponent<Sprite>();
+		pb = &entity->getComponent<PhysicsBody>();
 	}
 
 	void update() override {
-		if (Game::event.type == SDL_KEYDOWN) {
+		pb->update();
+		transform->velocity.y = pb->Position().y;
+		/*if (Game::event.type == SDL_KEYDOWN) {
 			switch (Game::event.key.keysym.sym) {
 			case SDLK_w:
 				transform->velocity.y = -1;
@@ -77,6 +81,6 @@ public:
 			default:
 				break;
 			}
-		}
+		}*/
 	}
 };

@@ -75,6 +75,7 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	player.addComponent<Sprite>("Assets/slime-animated.png", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<Collider>("enemy");
+	player.addComponent<PhysicsBody>(1.0f, 9.0f);
 	player.assignGroup(groupPlayer);
 
 	wall.addComponent<Transform>(300.0f, 300.0f, 300, 20, 1);
